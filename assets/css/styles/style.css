@@ -346,3 +346,27 @@ img{
 .pix a:nth-child(1){
     color: #fff;
 }
+
+.button-voltar button{
+    margin-top: 15px;
+    font-size: 1.1rem;
+    width: 50px;
+    align-items: center;
+    text-align: center;
+    height: 30px;
+    border: none;
+    border-radius: .6rem;
+    font-weight: bolder;
+}
+.button-voltar button:nth-child(1){
+    margin-bottom: 2px;
+    background: #fff;
+    color: #a520cd;
+    transition: .3s;
+}
+.button-voltar button:nth-child(1):hover{
+    box-shadow: #750e94 0px 4px 6px;
+}
+.button-voltar a:nth-child(1){
+    color: #fff;
+}
