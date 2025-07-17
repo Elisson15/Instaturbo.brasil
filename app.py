@@ -35,6 +35,7 @@ def pendente():
 
 @app.route('/criar_pagamento', methods=['POST', 'OPTIONS'])
 def criar_pagamento():
+    print("Recebido POST em /criar_pagamento")
     data = request.json
     rede_social = data.get('rede_social')
     tipo = data.get('tipo')
