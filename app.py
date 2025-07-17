@@ -76,9 +76,10 @@ def criar_pagamento():
         #     "installments": 12
         # },
         "back_urls": {
-            "success": "127.0.0.1:5500/sucesso.html",
-            "failure": "127.0.0.1:5500/erro.html",
-            "pending": "127.0.0.1:5500/erro.html"
+            "success": "https://instaturbo.vercel.app/sucesso.html",
+            "failure": "https://instaturbo.vercel.app/erro.html",
+            "pending": "https://instaturbo.vercel.app/pendente.html"
+
         },
         "auto_return": "approved"
     }
@@ -107,4 +108,6 @@ def criar_pagamento():
     return jsonify({'init_point': init_point})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+import os
+app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
