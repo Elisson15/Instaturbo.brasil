@@ -21,6 +21,11 @@ db_config = {
     'port': 3306
 }
 
+@app.route('/teste')
+def teste():
+    return "Teste OK"
+
+
 @app.route('/sucesso')
 def sucesso():
     return render_template('sucesso.html')
