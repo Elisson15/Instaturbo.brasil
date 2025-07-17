@@ -1,0 +1,117 @@
+:root {
+    --font-primary: 'Roboto', sans-serif;
+    --color-background: #e2e6de;
+    --BG-color-header: #a520cd;
+    --BG-color-button: #a520cd;
+    --Font-size-name-product-PC: 1.2rem;
+    --Font-size-name-product-MB: 1.1rem;
+}
+
+
+/* Container para o formulário, centralizado e com max-width */
+form {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto 40px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #3a0c61; /* tom escuro roxo para texto */
+}
+
+/* Inputs e selects no estilo do site */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-radius: 0.6rem;
+    border: 2px solid transparent;
+    background-color: #f8f7fb; /* fundo leve */
+    color: #3a0c61;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--BG-color-button);
+    box-shadow: 0 0 6px var(--BG-color-button);
+    outline: none;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Placeholder com cor mais clara */
+input::placeholder,
+select::placeholder {
+    color: #a099ba;
+    font-weight: 500;
+}
+
+/* Botão principal estilo original */
+button#comprar {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    background-color: var(--BG-color-button);
+    border: none;
+    border-radius: 0.6rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#comprar:hover {
+    background-color: #750e94;
+}
+
+/* Texto do total */
+#total {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--BG-color-button);
+    text-align: center;
+}
+
+/* RESPONSIVO para mobile */
+@media screen and (max-width: 480px) {
+    form {
+        padding: 0 10px;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-size: 1.1rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 1.3rem;
+        padding: 10px 12px;
+    }
+
+    button#comprar {
+        font-size: 1.4rem;
+        padding: 12px 0;
+    }
+
+    #total {
+        font-size: 1.4rem;
+    }
+}

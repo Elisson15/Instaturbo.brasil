@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pagamento Não Aprovado - InstaTurbo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 480px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .icon {
+    font-size: 80px;
+    color: #ff2e2e; /* vermelho erro */
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-bottom: 28px;
+  }
+  a.button {
+    display: inline-block;
+    background-color: #ff2e2e;
+    color: white;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  a.button:hover {
+    background-color: #cc2525;
+  }
+  @media (max-width: 480px) {
+    .container {
+      padding: 30px 20px;
+    }
+    h1 {
+      font-size: 2.2rem;
+    }
+    .icon {
+      font-size: 60px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">❌</div>
+    <h1>Pagamento Não Aprovado</h1>
+    <p>Ocorreu um problema ao processar seu pagamento. Por favor, tente novamente ou entre em contato com o suporte.</p>
+    <a href="comprar.html" class="button">Tentar Novamente</a>
+  </div>
+</body>
+</html>
