@@ -84,7 +84,7 @@ def criar_pagamento():
         "back_urls": {
             "success": "https://instaturbo.vercel.app/sucesso.html",
             "failure": "https://instaturbo.vercel.app/erro.html",
-            "pending": "https://instaturbo.vercel.app/pendente.html"
+            "pending": "https://instaturbo.vercel.app/erro.html"
 
         },
         "auto_return": "approved"
