@@ -38,7 +38,7 @@ def erro():
 def pendente():
     return render_template('pendente.html')
 
-@app.route('/criar_pagamento', methods=['POST', 'OPTIONS'])
+@app.route('/criar_pagamento', methods=['POST', 'OPTIONS', 'GET'])
 def criar_pagamento():
     print("Recebido POST em /criar_pagamento")
     data = request.json
