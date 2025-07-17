@@ -20,6 +20,12 @@ db_config = {
     'port': 12996
 }
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers.add("Access-Control-Allow-Origin", "https://instaturbo.vercel.app")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    return response
 
 @app.route('/sucesso')
 def sucesso():
