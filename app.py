@@ -6,7 +6,8 @@ import datetime
 from flask import render_template
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app"}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app"}})
+
 
 # Configuração do Mercado Pago
 sdk = mercadopago.SDK('APP_USR-8369192826034467-062805-d94db51d5c00a042fa3f2c2a3b952c2b-1481851807')
