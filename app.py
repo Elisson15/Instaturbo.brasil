@@ -6,7 +6,7 @@ import datetime
 from flask import render_template
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app/comprar.html"}})
+CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app"}})
 
 
 # Configuração do Mercado Pago
@@ -18,7 +18,7 @@ db_config = {
     'user': 'root',
     'password': 'EGfXRIrSvUSjGIPVvKfyTuDlESMdSanE',
     'database': 'railway',
-    'port': 3306
+    'port': 12996
 }
 
 @app.route('/teste')
