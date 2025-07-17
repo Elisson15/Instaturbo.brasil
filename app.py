@@ -13,19 +13,12 @@ sdk = mercadopago.SDK('APP_USR-8369192826034467-062805-d94db51d5c00a042fa3f2c2a3
 
 # Configuração do banco de dados
 db_config = {
-    'host': 'metro.proxy.rlwy.net:',
+    'host': 'metro.proxy.rlwy.net',
     'user': 'root',
     'password': 'EGfXRIrSvUSjGIPVvKfyTuDlESMdSanE',
     'database': 'railway',
     'port': 12996
 }
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers.add("Access-Control-Allow-Origin", "https://instaturbo.vercel.app")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    return response
 
 @app.route('/sucesso')
 def sucesso():
@@ -39,7 +32,7 @@ def erro():
 def pendente():
     return render_template('pendente.html')
 
-@app.route('/criar_pagamento', methods=['POST'])
+@app.route('/criar_pagamento', methods=['POST', 'OPTIONS'])
 def criar_pagamento():
     data = request.json
     rede_social = data.get('rede_social')
