@@ -16,7 +16,7 @@ db_config = {
     'host': 'metro.proxy.rlwy.net:',
     'user': 'root',
     'password': 'EGfXRIrSvUSjGIPVvKfyTuDlESMdSanE',
-    'database': 'railway'
+    'database': 'railway',
     'port': 12996
 }
 
@@ -114,6 +114,5 @@ def criar_pagamento():
     return jsonify({'init_point': init_point})
 
 if __name__ == '__main__':
-import os
-app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
-
+    import os
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
