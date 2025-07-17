@@ -16,7 +16,7 @@ db_config = {
     'host': '@metro.proxy.rlwy.net:',
     'user': 'root',
     'password': 'EGfXRIrSvUSjGIPVvKfyTuDlESMdSanE',
-    'database': 'instaturbo'
+    'database': 'railway'
     'port': 12996
 }
 
