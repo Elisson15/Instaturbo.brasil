@@ -13,10 +13,11 @@ sdk = mercadopago.SDK('APP_USR-8369192826034467-062805-d94db51d5c00a042fa3f2c2a3
 
 # Configuração do banco de dados
 db_config = {
-    'host': '127.0.0.1',
+    'host': '@metro.proxy.rlwy.net:',
     'user': 'root',
-    'password': 'elisson',
+    'password': 'EGfXRIrSvUSjGIPVvKfyTuDlESMdSanE',
     'database': 'instaturbo'
+    'port': 12996
 }
 
 
