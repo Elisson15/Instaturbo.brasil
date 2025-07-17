@@ -6,6 +6,7 @@ import datetime
 from flask import render_template
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app"}})
 CORS(app)
 
 # Configuração do Mercado Pago
