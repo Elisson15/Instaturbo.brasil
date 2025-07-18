@@ -74,7 +74,7 @@
             return;
         }
 
-        const response = await fetch('http://127.0.0.1:5000/criar_pagamento', {
+        const response = await fetch('https://instaturbo-brasil.onrender.com/criar_pagamento', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

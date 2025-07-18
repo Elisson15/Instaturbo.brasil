@@ -38,7 +38,7 @@ def erro():
 
 @app.route('/pendente')
 def pendente():
-    return render_template('erro.html')
+    return render_template('pendente.html')
 
 @app.route('/criar_pagamento', methods=['POST'])
 def criar_pagamento():
@@ -68,16 +68,22 @@ def criar_pagamento():
                  f"Valor Unitário: R${valor_unitario:.2f} | Valor Total: R${valor_total:.2f} | "
                  f"Link/@: {link_perfil} | Obrigado por comprar com a gente! Volte sempre.☺️❤️")
 
-    preference_data = {
-        "items": [
-            {
-                "title": descricao,
-                "quantity": 1,
-                "unit_price": float(valor_total)
-            }
-        ],
+preference_data = {
+    "items": [
+        {
+            "title": descricao,
+            "quantity": 1,
+            "unit_price": float(valor_total)
+        }
+    ],
+    "back_urls": {
+        "success": "https://instaturbo-brasil.onrender.com/sucesso",
+        "failure": "https://instaturbo-brasil.onrender.com/erro",
+        "pending": "https://instaturbo-brasil.onrender.com/pendente"
+    },
+    "auto_return": "approved"
+}
 
-    }
 
     try:
         payment_response = sdk.preference().create(preference_data)
