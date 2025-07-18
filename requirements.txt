@@ -1,4 +1,5 @@
 Flask
+Flask-Cors
 mysql-connector-python
 mercadopago
 gunicorn
