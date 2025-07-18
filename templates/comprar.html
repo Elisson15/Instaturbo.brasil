@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/style.css">
+    <title>InstaTurbo - Comprar Serviços</title>
+    <style>
+        input, select, button { margin: 10px 0; padding: 10px; width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Comprar Serviços</h1>
+
+    <label>Rede Social:</label>
+    <select id="rede_social">
+        <option value="">Selecione</option>
+        <option>Instagram</option>
+        <option>TikTok</option>
+        <option>Kwai</option>
+    </select>
+
+    <label>Tipo:</label>
+    <select id="tipo">
+        <option value="">Selecione</option>
+        <option>Seguidores</option>
+        <option>Curtidas</option>
+        <option>Visualizações</option>
+    </select>
+
+    <label>Quantidade:</label>
+    <input type="number" id="quantidade" min="100">
+
+    <label id="label_link">Informe o @ ou link do perfil/publicação:</label>
+    <input type="text" id="link_perfil">
+
+    <p id="total">Total: R$0,00</p>
+
+    <button id="comprar">Fazer Compra</button>
+
+    <script>
+    const valoresPorTipo = {
+        'Seguidores': 0.01,
+        'Curtidas': 0.15,
+        'Visualizações': 0.10
+    };
+
+    document.getElementById('quantidade').addEventListener('input', atualizarTotal);
+    document.getElementById('tipo').addEventListener('change', () => {
+        const tipo = document.getElementById('tipo').value;
+        document.getElementById('label_link').textContent =
+            tipo === 'Seguidores' ? 'Informe o @ ou link do perfil:' : 'Informe o link da publicação:';
+        atualizarTotal();
+    });
+
+    function atualizarTotal() {
+        const tipo = document.getElementById('tipo').value;
+        const quantidade = parseInt(document.getElementById('quantidade').value) || 0;
+        const valorUnitario = valoresPorTipo[tipo] || 0;
+        const total = quantidade * valorUnitario;
+        document.getElementById('total').textContent = `Total: R$${total.toFixed(2)}`;
+    }
+
+    document.getElementById('comprar').addEventListener('click', async () => {
+        const redeSocial = document.getElementById('rede_social').value;
+        const tipo = document.getElementById('tipo').value;
+        const quantidade = parseInt(document.getElementById('quantidade').value);
+        const linkPerfil = document.getElementById('link_perfil').value.trim();
+        const valorUnitario = valoresPorTipo[tipo] || 0;
+        const valorTotal = quantidade * valorUnitario;
+
+        if (!redeSocial || !tipo || !quantidade || !linkPerfil) {
+            alert('Preencha todos os campos!');
+            return;
+        }
+
+        const response = await fetch('http://127.0.0.1:5000/criar_pagamento', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                rede_social: redeSocial,
+                tipo: tipo,
+                quantidade: quantidade,
+                valor_unitario: valorUnitario,
+                valor_total: valorTotal,
+                link_perfil: linkPerfil
+            })
+        });
+
+        const data = await response.json();
+        if (data.init_point) {
+            window.location.href = data.init_point;
+        } else {
+            alert('Erro ao criar pagamento.');
+        }
+    });
+</script>
+
+</body>
+</html>

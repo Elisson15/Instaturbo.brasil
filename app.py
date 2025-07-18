@@ -6,8 +6,7 @@ import datetime
 from flask import render_template
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://instaturbo.vercel.app/comprar.html"}})
-
+CORS(app)
 
 # Configuração do Mercado Pago
 sdk = mercadopago.SDK('APP_USR-8369192826034467-062805-d94db51d5c00a042fa3f2c2a3b952c2b-1481851807')
@@ -21,10 +20,13 @@ db_config = {
     'port': 12996
 }
 
-@app.route('/teste')
-def teste():
-    return "Teste OK"
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/comprar')
+def comprar():
+    return render_template('comprar.html')
 
 @app.route('/sucesso')
 def sucesso():
@@ -36,37 +38,35 @@ def erro():
 
 @app.route('/pendente')
 def pendente():
-    return render_template('pendente.html')
+    return render_template('erro.html')
 
-@app.route('/criar_pagamento', methods=['POST', 'OPTIONS', 'GET'])
+@app.route('/criar_pagamento', methods=['POST'])
 def criar_pagamento():
-    print("Recebido POST em /criar_pagamento")
     data = request.json
     rede_social = data.get('rede_social')
     tipo = data.get('tipo')
     quantidade = data.get('quantidade')
     link_perfil = data.get('link_perfil')
+    print("Dados recebidos:", data)  # <-- debug
 
     if not (rede_social and tipo and quantidade and link_perfil):
         return jsonify({'error': 'Dados incompletos.'}), 400
 
     # Definir o valor unitário conforme o tipo
     precos = {
-        'Seguidores': 0.01,
-        'Curtidas': 0.15,
-        'Visualizações': 0.10
+        'Seguidores': 0.02,
+        'Curtidas': 0.02,
+        'Visualizações': 0.03
     }
 
-    valor_unitario = precos.get(tipo)
-    if valor_unitario is None:
-        return jsonify({'error': 'Tipo inválido.'}), 400
+    valor_unitario = data.get('valor_unitario', precos.get(tipo))
+    valor_total = data.get('valor_total', quantidade * valor_unitario)
 
-    valor_total = quantidade * valor_unitario
 
-    descricao = (f"Compra no site https://instaturbo.vercel.app/ | "
+    descricao = (f"Compra no app InstaTurbo | "
                  f"Rede Social: {rede_social} | Tipo: {tipo} | Quantidade: {quantidade} | "
                  f"Valor Unitário: R${valor_unitario:.2f} | Valor Total: R${valor_total:.2f} | "
-                 f"Link/@: {link_perfil} | Obrigado por comprar com a gente! Volte sempre.")
+                 f"Link/@: {link_perfil} | Obrigado por comprar com a gente! Volte sempre.☺️❤️")
 
     preference_data = {
         "items": [
@@ -76,23 +76,13 @@ def criar_pagamento():
                 "unit_price": float(valor_total)
             }
         ],
-        # Você pode ajustar métodos de pagamento aqui, se quiser:
-        # "payment_methods": {
-        #     "excluded_payment_types": [{"id": "ticket"}],  # Excluir boleto, por exemplo
-        #     "installments": 12
-        # },
-        "back_urls": {
-            "success": "https://instaturbo.vercel.app/sucesso.html",
-            "failure": "https://instaturbo.vercel.app/erro.html",
-            "pending": "https://instaturbo.vercel.app/erro.html"
 
-        },
-        "auto_return": "approved"
     }
 
     try:
         payment_response = sdk.preference().create(preference_data)
         payment = payment_response["response"]
+        print("Resposta do MercadoPago:", payment_response)  # <-- Debug para ver a resposta completa
 
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
@@ -113,7 +103,12 @@ def criar_pagamento():
     init_point = payment.get("init_point", "")
     return jsonify({'init_point': init_point})
 
-if __name__ == '__main__':
-    import os
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+import webbrowser
+from threading import Timer
 
+def abrir_navegador():
+    webbrowser.open_new("http://127.0.0.1:5000")
+
+if __name__ == "__main__":
+    Timer(1, abrir_navegador).start()  # Abre o navegador após 1 segundo
+    app.run(port=5000, debug=False)
