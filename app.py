@@ -93,8 +93,8 @@ preference_data = {
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO pagamentos (valor_total, valor_unitario, rede_social, tipo, quantidade, link_perfil)
-            VALUES (%s, %s, %s, %s, %s, %s)
+        INSERT INTO pagamentos (valor_total, valor_unitario, rede_social, tipo, quantidade, link_perfil)
+        VALUES (%s, %s, %s, %s, %s, %s)
         """, (valor_total, valor_unitario, rede_social, tipo, quantidade, link_perfil))
         conn.commit()
 
