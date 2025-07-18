@@ -103,12 +103,5 @@ def criar_pagamento():
     init_point = payment.get("init_point", "")
     return jsonify({'init_point': init_point})
 
-import webbrowser
-from threading import Timer
-
-def abrir_navegador():
-    webbrowser.open_new("http://127.0.0.1:5000")
-
-if __name__ == "__main__":
-    Timer(1, abrir_navegador).start()  # Abre o navegador após 1 segundo
-    app.run(port=5000, debug=False)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
